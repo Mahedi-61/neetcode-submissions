@@ -1,0 +1,24 @@
+class Solution:
+    def maxSubarraySumCircular(self, nums: List[int]) -> int:
+        
+        max_sum = nums[0]
+        k = len(nums)
+
+        for j in range(k):
+            temp_sum = 0
+            for i in range(j, 2 * k):
+                if nums[i % k] >= temp_sum + nums[i % k]:
+                    temp_sum = nums[i % k]
+                    begin = i % k 
+                    end = begin
+
+                else:
+                    temp_sum += nums[i % k]
+                    end += 1
+
+                if i >= k and end % k == begin:
+                    break
+                    #return max_sum
+
+                max_sum = max(max_sum, temp_sum)
+        return max_sum
